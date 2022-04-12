@@ -3,13 +3,11 @@ const mongoose = require('mongoose');
 const userRoutes = require("./routes/user");
 const sauceRoutes = require("./routes/sauce");
 const path =require("path");
-const helmet = require("helmet");
 
 require('dotenv').config()
 
 const app = express();
 
-app.use(helmet());
 
 mongoose.connect(`mongodb+srv://${process.env.mongoUsername}:${process.env.mongoPassword}@cluster0.oom1r.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
   { useNewUrlParser: true,
