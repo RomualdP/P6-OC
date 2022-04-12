@@ -57,7 +57,7 @@ exports.likeSauce = (req, res, next) => {
     case 0:
       Sauce.findOne({ _id: req.params.id })
         .then((sauce) => {
-          if (sauce.usersLiked.find((user) => user === req.body.userId)) {
+          if (sauce.usersLiked.find((userId) => userId === req.body.userId)) {
             Sauce.updateOne(
               { _id: req.params.id },
               {
@@ -73,7 +73,8 @@ exports.likeSauce = (req, res, next) => {
                 res.status(400).json({ error: error });
               });
           }
-          if (sauce.usersDisliked.find((user) => user === req.body.userId)) {
+          console.log(req.body.userId)
+          if (sauce.usersDisliked.find((userId) => userId === req.body.userId)) {
             Sauce.updateOne(
               { _id: req.params.id },
               {
@@ -95,7 +96,7 @@ exports.likeSauce = (req, res, next) => {
     case 1:
       Sauce.findOne({ _id: req.params.id })
         .then((sauce) => {
-          if (!sauce.usersLiked.find((user) => user === req.body.userId)) {
+          if (!sauce.usersLiked.find((userId) => userId === req.body.userId)) {
             Sauce.updateOne(
               { _id: req.params.id },
               {
@@ -117,7 +118,7 @@ exports.likeSauce = (req, res, next) => {
     case -1:
       Sauce.findOne({ _id: req.params.id })
         .then((sauce) => {
-          if (!sauce.usersDisliked.find((user) => user === req.body.userId)) {
+          if (!sauce.usersDisliked.find((userId) => userId === req.body.userId)) {
             Sauce.updateOne(
               { _id: req.params.id },
               {
