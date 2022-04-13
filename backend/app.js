@@ -3,12 +3,11 @@ const mongoose = require('mongoose');
 const userRoutes = require("./routes/user");
 const sauceRoutes = require("./routes/sauce");
 const path =require("path");
-
-require('dotenv').config()
+const helmet = require('helmet');
 
 const app = express();
 
-
+require('dotenv').config()
 mongoose.connect(`mongodb+srv://${process.env.mongoUsername}:${process.env.mongoPassword}@cluster0.oom1r.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
@@ -29,4 +28,5 @@ app.use("/api/auth", userRoutes);
 
 app.use("/images", express.static(path.join(__dirname, "images")))
 
+app.use(helmet())
 module.exports = app;
